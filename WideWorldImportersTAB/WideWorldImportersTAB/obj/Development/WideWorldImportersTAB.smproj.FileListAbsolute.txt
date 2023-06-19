@@ -1,0 +1,9 @@
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\bin\Model.asdatabase
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\bin\Model.deploymenttargets
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\bin\Model.deploymentoptions
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\obj\Development\WideWorldImportersTAB.smproj.AssemblyReference.cache
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\obj\Development\WideWorldImportersTAB.smproj.SuggestedBindingRedirects.cache
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\obj\Development\WideWorldImportersTAB.smproj.CoreCompileInputs.cache
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\obj\Development\Model.asdatabase
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\obj\Development\Model.deploymentoptions
+C:\Users\Bruger\OneDrive\College\6.SemesterS23\BUI\0.Project\WideWorldImportersTAB\WideWorldImportersTAB\WideWorldImportersTAB\obj\Development\Model.deploymenttargets

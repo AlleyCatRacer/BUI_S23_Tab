@@ -1,0 +1,2576 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "da-DK",
+    "discourageImplicitMeasures": true,
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "SKYLAR\\SQL19MULTIDIM",
+            "database": "WideWorldImportersDW"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "ServiceAccount",
+          "kind": "SQL",
+          "path": "skylar\\sql19multidim;WideWorldImportersDW",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Salesperson",
+        "columns": [
+          {
+            "name": "Employee Key",
+            "dataType": "int64",
+            "sourceColumn": "Employee Key"
+          },
+          {
+            "name": "WWI Employee ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Employee ID"
+          },
+          {
+            "name": "Employee",
+            "dataType": "string",
+            "sourceColumn": "Employee"
+          },
+          {
+            "name": "Preferred Name",
+            "dataType": "string",
+            "sourceColumn": "Preferred Name"
+          },
+          {
+            "name": "Last Name",
+            "dataType": "string",
+            "sourceColumn": "Last Name"
+          },
+          {
+            "name": "First Name",
+            "dataType": "string",
+            "sourceColumn": "First Name"
+          },
+          {
+            "name": "Valid From",
+            "dataType": "dateTime",
+            "sourceColumn": "Valid From"
+          },
+          {
+            "name": "Valid To",
+            "dataType": "dateTime",
+            "sourceColumn": "Valid To"
+          },
+          {
+            "name": "Current",
+            "dataType": "int64",
+            "sourceColumn": "Current"
+          },
+          {
+            "name": "Lineage Key",
+            "dataType": "int64",
+            "sourceColumn": "Lineage Key"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Salesperson = Source{[Schema=\"Cube\",Item=\"Salesperson\"]}[Data]",
+                "in",
+                "    Cube_Salesperson"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "City",
+        "columns": [
+          {
+            "name": "City Key",
+            "dataType": "int64",
+            "sourceColumn": "City Key"
+          },
+          {
+            "name": "WWI City ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI City ID"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "State Province",
+            "dataType": "string",
+            "sourceColumn": "State Province"
+          },
+          {
+            "name": "Country",
+            "dataType": "string",
+            "sourceColumn": "Country"
+          },
+          {
+            "name": "Continent",
+            "dataType": "string",
+            "sourceColumn": "Continent"
+          },
+          {
+            "name": "Sales Territory",
+            "dataType": "string",
+            "sourceColumn": "Sales Territory"
+          },
+          {
+            "name": "Region",
+            "dataType": "string",
+            "sourceColumn": "Region"
+          },
+          {
+            "name": "Subregion",
+            "dataType": "string",
+            "sourceColumn": "Subregion"
+          },
+          {
+            "name": "Location",
+            "dataType": "string",
+            "sourceColumn": "Location"
+          },
+          {
+            "name": "Latest Recorded Population",
+            "dataType": "int64",
+            "sourceColumn": "Latest Recorded Population"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_City = Source{[Schema=\"Cube\",Item=\"City\"]}[Data]",
+                "in",
+                "    Cube_City"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Geography",
+            "levels": [
+              {
+                "name": "Continent",
+                "ordinal": 0,
+                "column": "Continent"
+              },
+              {
+                "name": "Country",
+                "ordinal": 1,
+                "column": "Country"
+              },
+              {
+                "name": "State Province",
+                "ordinal": 2,
+                "column": "State Province"
+              },
+              {
+                "name": "City",
+                "ordinal": 3,
+                "column": "City"
+              }
+            ]
+          },
+          {
+            "name": "Sales Region",
+            "levels": [
+              {
+                "name": "Region",
+                "ordinal": 0,
+                "column": "Region"
+              },
+              {
+                "name": "Subregion",
+                "ordinal": 1,
+                "column": "Subregion"
+              },
+              {
+                "name": "Sales Territory",
+                "ordinal": 2,
+                "column": "Sales Territory"
+              },
+              {
+                "name": "State Province",
+                "ordinal": 3,
+                "column": "State Province"
+              },
+              {
+                "name": "City",
+                "ordinal": 4,
+                "column": "City"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Customer",
+        "columns": [
+          {
+            "name": "Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Customer Key"
+          },
+          {
+            "name": "WWI Customer ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Customer ID"
+          },
+          {
+            "name": "Customer",
+            "dataType": "string",
+            "sourceColumn": "Customer"
+          },
+          {
+            "name": "Bill To Customer",
+            "dataType": "string",
+            "sourceColumn": "Bill To Customer"
+          },
+          {
+            "name": "Category",
+            "dataType": "string",
+            "sourceColumn": "Category"
+          },
+          {
+            "name": "Buying Group",
+            "dataType": "string",
+            "sourceColumn": "Buying Group"
+          },
+          {
+            "name": "Primary Contact",
+            "dataType": "string",
+            "sourceColumn": "Primary Contact"
+          },
+          {
+            "name": "Postal Code",
+            "dataType": "string",
+            "sourceColumn": "Postal Code"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Customer = Source{[Schema=\"Cube\",Item=\"Customer\"]}[Data]",
+                "in",
+                "    Cube_Customer"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Customer Hierarchy",
+            "levels": [
+              {
+                "name": "Category",
+                "ordinal": 0,
+                "column": "Category"
+              },
+              {
+                "name": "Buying Group",
+                "ordinal": 1,
+                "column": "Buying Group"
+              },
+              {
+                "name": "Bill To Customer",
+                "ordinal": 2,
+                "column": "Bill To Customer"
+              },
+              {
+                "name": "Customer",
+                "ordinal": 3,
+                "column": "Customer"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isKey": true,
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "Day Number",
+            "dataType": "int64",
+            "sourceColumn": "Day Number"
+          },
+          {
+            "name": "Day",
+            "dataType": "string",
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month"
+          },
+          {
+            "name": "Short Month",
+            "dataType": "string",
+            "sourceColumn": "Short Month"
+          },
+          {
+            "name": "Calendar Month Number",
+            "dataType": "int64",
+            "sourceColumn": "Calendar Month Number"
+          },
+          {
+            "name": "Calendar Month Label",
+            "dataType": "string",
+            "sourceColumn": "Calendar Month Label"
+          },
+          {
+            "name": "Calendar Year",
+            "dataType": "int64",
+            "sourceColumn": "Calendar Year"
+          },
+          {
+            "name": "Calendar Year Label",
+            "dataType": "string",
+            "sourceColumn": "Calendar Year Label"
+          },
+          {
+            "name": "Fiscal Month Number",
+            "dataType": "int64",
+            "sourceColumn": "Fiscal Month Number"
+          },
+          {
+            "name": "Fiscal Month Label",
+            "dataType": "string",
+            "sourceColumn": "Fiscal Month Label"
+          },
+          {
+            "name": "Fiscal Year",
+            "dataType": "int64",
+            "sourceColumn": "Fiscal Year"
+          },
+          {
+            "name": "Fiscal Year Label",
+            "dataType": "string",
+            "sourceColumn": "Fiscal Year Label"
+          },
+          {
+            "name": "ISO Week Number",
+            "dataType": "int64",
+            "sourceColumn": "ISO Week Number"
+          },
+          {
+            "name": "Today",
+            "dataType": "int64",
+            "sourceColumn": "Today"
+          },
+          {
+            "type": "calculated",
+            "name": "Fiscal Quarter",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "IF('Date'[Fiscal Month Number] IN {1,2,3}, 1, IF('Date'[Fiscal Month Number] IN {4,5,6}, 2, IF('Date'[Fiscal Month Number] IN {7,8,9}, 3, 4)))"
+          },
+          {
+            "type": "calculated",
+            "name": "Calendar Quarter",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "IF('Date'[Calendar Month Number] IN {1,2,3}, 1, IF('Date'[Calendar Month Number] IN {4,5,6}, 2, IF('Date'[Calendar Month Number] IN {7,8,9}, 3, 4)))"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Date = Source{[Schema=\"Cube\",Item=\"Date\"]}[Data]",
+                "in",
+                "    Cube_Date"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Calendar",
+            "levels": [
+              {
+                "name": "Calendar Year",
+                "ordinal": 0,
+                "column": "Calendar Year Label"
+              },
+              {
+                "name": "Calendar Month",
+                "ordinal": 1,
+                "column": "Calendar Month Label"
+              },
+              {
+                "name": "Date",
+                "ordinal": 2,
+                "column": "Date"
+              }
+            ]
+          },
+          {
+            "name": "Fiscal",
+            "levels": [
+              {
+                "name": "Fiscal Year",
+                "ordinal": 0,
+                "column": "Fiscal Year Label"
+              },
+              {
+                "name": "Fiscal Month",
+                "ordinal": 1,
+                "column": "Fiscal Month Label"
+              },
+              {
+                "name": "Date",
+                "ordinal": 2,
+                "column": "Date"
+              }
+            ]
+          },
+          {
+            "name": "FiscalDisplay",
+            "levels": [
+              {
+                "name": "Fiscal Year",
+                "ordinal": 0,
+                "column": "Fiscal Year"
+              },
+              {
+                "name": "Fiscal Quarter",
+                "ordinal": 1,
+                "column": "Fiscal Quarter"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month"
+              }
+            ]
+          },
+          {
+            "name": "CalendarDisplay",
+            "levels": [
+              {
+                "name": "Calendar Year",
+                "ordinal": 0,
+                "column": "Calendar Year"
+              },
+              {
+                "name": "Month",
+                "ordinal": 2,
+                "column": "Month"
+              },
+              {
+                "name": "Calendar Quarter",
+                "ordinal": 1,
+                "column": "Calendar Quarter"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Invoice",
+        "columns": [
+          {
+            "name": "WWI Invoice ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Invoice ID"
+          },
+          {
+            "name": "Invoice Date Key",
+            "dataType": "dateTime",
+            "sourceColumn": "Invoice Date Key"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Invoice = Source{[Schema=\"Cube\",Item=\"Invoice\"]}[Data]",
+                "in",
+                "    Cube_Invoice"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Invoice Sales",
+        "columns": [
+          {
+            "name": "WWI Invoice ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Invoice ID"
+          },
+          {
+            "name": "City Key",
+            "dataType": "int64",
+            "sourceColumn": "City Key"
+          },
+          {
+            "name": "WWI City ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI City ID"
+          },
+          {
+            "name": "Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Customer Key"
+          },
+          {
+            "name": "WWI Customer ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Customer ID"
+          },
+          {
+            "name": "Bill To Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Bill To Customer Key"
+          },
+          {
+            "name": "WWI Bill To Customer ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Bill To Customer ID"
+          },
+          {
+            "name": "Invoice Date Key",
+            "dataType": "dateTime",
+            "sourceColumn": "Invoice Date Key"
+          },
+          {
+            "name": "Salesperson Key",
+            "dataType": "int64",
+            "sourceColumn": "Salesperson Key"
+          },
+          {
+            "name": "WWI Employee ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Employee ID"
+          },
+          {
+            "name": "Invoice Total Excluding Tax",
+            "dataType": "double",
+            "sourceColumn": "Invoice Total Excluding Tax"
+          },
+          {
+            "name": "Invoice Tax Amount",
+            "dataType": "double",
+            "sourceColumn": "Invoice Tax Amount"
+          },
+          {
+            "name": "Invoice Profit",
+            "dataType": "double",
+            "sourceColumn": "Invoice Profit"
+          },
+          {
+            "name": "Invoice Total Including Tax",
+            "dataType": "double",
+            "sourceColumn": "Invoice Total Including Tax"
+          },
+          {
+            "name": "Invoice Total Dry Items",
+            "dataType": "int64",
+            "sourceColumn": "Invoice Total Dry Items"
+          },
+          {
+            "name": "Invoice Total Chiller Items",
+            "dataType": "int64",
+            "sourceColumn": "Invoice Total Chiller Items"
+          },
+          {
+            "name": "Invoice Count",
+            "dataType": "int64",
+            "sourceColumn": "Invoice Count"
+          },
+          {
+            "name": "Sales Count",
+            "dataType": "int64",
+            "sourceColumn": "Sales Count"
+          },
+          {
+            "name": "Invoice Profit - Copy",
+            "dataType": "double",
+            "sourceColumn": "Invoice Profit - Copy"
+          },
+          {
+            "type": "calculated",
+            "name": "Missing Profit",
+            "dataType": "boolean",
+            "isDataTypeInferred": true,
+            "expression": "ISBLANK('Invoice Sales'[Invoice Profit - Copy])",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    #\"Cube_Invoice Sales\" = Source{[Schema=\"Cube\",Item=\"Invoice Sales\"]}[Data],",
+                "    #\"Duplicated Column\" = Table.DuplicateColumn(#\"Cube_Invoice Sales\", \"Invoice Profit\", \"Invoice Profit - Copy\"),",
+                "    #\"Replaced Value\" = Table.ReplaceValue(#\"Duplicated Column\",40,null,Replacer.ReplaceValue,{\"Invoice Profit - Copy\"})",
+                "in",
+                "    #\"Replaced Value\""
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Average Invoice Profit",
+            "expression": "AVERAGE('Invoice Sales'[Invoice Profit])",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Average Indiana Profit",
+            "expression": "AVERAGEX('Invoice Sales',IF(RELATED(City[State Province])=\"Indiana\",'Invoice Sales'[Invoice Profit],\"\"))",
+            "formatString": "0.00"
+          },
+          {
+            "name": "Count Inv Profits",
+            "expression": "COUNT('Invoice Sales'[Invoice Profit - Copy])"
+          },
+          {
+            "name": "CountA Inv Profits",
+            "expression": "COUNTA('Invoice Sales'[Invoice Profit - Copy])"
+          },
+          {
+            "name": "Total Profit Count",
+            "expression": "COUNTA('Invoice Sales'[Missing Profit])"
+          },
+          {
+            "name": "Invoices Missing Profits",
+            "expression": "[Total Profit Count]-[Count Inv Profits]"
+          },
+          {
+            "name": "% of All Invoices",
+            "expression": "COUNT(Invoice[WWI Invoice ID]) / CALCULATE(COUNT(Invoice[WWI Invoice ID]),ALL('Invoice Sales'))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "Invoice Sales YTD",
+            "expression": "TOTALYTD(SUM('Invoice Sales'[Invoice Total Including Tax]), 'Date'[Date])",
+            "formatString": "#,0.00 \"kr.\";-#,0.00 \"kr.\";#,0.00 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Invoice Sales Next Year",
+            "expression": "CALCULATE(SUM('Invoice Sales'[Invoice Total Including Tax]), NEXTYEAR('Date'[Date]))"
+          },
+          {
+            "name": "Invoice Sales Previous Year",
+            "expression": "CALCULATE(SUM('Invoice Sales'[Invoice Total Including Tax]), PREVIOUSYEAR('Date'[Date]))"
+          }
+        ]
+      },
+      {
+        "name": "Item",
+        "columns": [
+          {
+            "name": "Stock Item Key",
+            "dataType": "int64",
+            "sourceColumn": "Stock Item Key"
+          },
+          {
+            "name": "WWI Stock Item ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Stock Item ID"
+          },
+          {
+            "name": "Stock Item",
+            "dataType": "string",
+            "sourceColumn": "Stock Item"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color"
+          },
+          {
+            "name": "Selling Package",
+            "dataType": "string",
+            "sourceColumn": "Selling Package"
+          },
+          {
+            "name": "Buying Package",
+            "dataType": "string",
+            "sourceColumn": "Buying Package"
+          },
+          {
+            "name": "Brand",
+            "dataType": "string",
+            "sourceColumn": "Brand"
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "sourceColumn": "Size"
+          },
+          {
+            "name": "Lead Time Days",
+            "dataType": "int64",
+            "sourceColumn": "Lead Time Days"
+          },
+          {
+            "name": "Quantity Per Outer",
+            "dataType": "int64",
+            "sourceColumn": "Quantity Per Outer"
+          },
+          {
+            "name": "Is Chiller Stock",
+            "dataType": "boolean",
+            "sourceColumn": "Is Chiller Stock"
+          },
+          {
+            "name": "Barcode",
+            "dataType": "string",
+            "sourceColumn": "Barcode"
+          },
+          {
+            "name": "Tax Rate",
+            "dataType": "double",
+            "sourceColumn": "Tax Rate"
+          },
+          {
+            "name": "Unit Price",
+            "dataType": "double",
+            "sourceColumn": "Unit Price"
+          },
+          {
+            "name": "Recommended Retail Price",
+            "dataType": "double",
+            "sourceColumn": "Recommended Retail Price"
+          },
+          {
+            "name": "Typical Weight Per Unit",
+            "dataType": "double",
+            "sourceColumn": "Typical Weight Per Unit"
+          },
+          {
+            "name": "Valid From",
+            "dataType": "dateTime",
+            "sourceColumn": "Valid From"
+          },
+          {
+            "name": "Valid To",
+            "dataType": "dateTime",
+            "sourceColumn": "Valid To"
+          },
+          {
+            "name": "Current",
+            "dataType": "int64",
+            "sourceColumn": "Current"
+          },
+          {
+            "name": "Lineage Key",
+            "dataType": "int64",
+            "sourceColumn": "Lineage Key"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Item = Source{[Schema=\"Cube\",Item=\"Item\"]}[Data]",
+                "in",
+                "    Cube_Item"
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Item Brand",
+            "levels": [
+              {
+                "name": "Brand",
+                "ordinal": 0,
+                "column": "Brand"
+              },
+              {
+                "name": "Stock Item",
+                "ordinal": 1,
+                "column": "Stock Item"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Item-Current",
+        "columns": [
+          {
+            "name": "WWI Stock Item ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Stock Item ID"
+          },
+          {
+            "name": "Stock Item",
+            "dataType": "string",
+            "sourceColumn": "Stock Item"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color"
+          },
+          {
+            "name": "Selling Package",
+            "dataType": "string",
+            "sourceColumn": "Selling Package"
+          },
+          {
+            "name": "Buying Package",
+            "dataType": "string",
+            "sourceColumn": "Buying Package"
+          },
+          {
+            "name": "Brand",
+            "dataType": "string",
+            "sourceColumn": "Brand"
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "sourceColumn": "Size"
+          },
+          {
+            "name": "Lead Time Days",
+            "dataType": "int64",
+            "sourceColumn": "Lead Time Days"
+          },
+          {
+            "name": "Quantity Per Outer",
+            "dataType": "int64",
+            "sourceColumn": "Quantity Per Outer"
+          },
+          {
+            "name": "Is Chiller Stock",
+            "dataType": "boolean",
+            "sourceColumn": "Is Chiller Stock"
+          },
+          {
+            "name": "Barcode",
+            "dataType": "string",
+            "sourceColumn": "Barcode"
+          },
+          {
+            "name": "Tax Rate",
+            "dataType": "double",
+            "sourceColumn": "Tax Rate"
+          },
+          {
+            "name": "Unit Price",
+            "dataType": "double",
+            "sourceColumn": "Unit Price"
+          },
+          {
+            "name": "Recommended Retail Price",
+            "dataType": "double",
+            "sourceColumn": "Recommended Retail Price"
+          },
+          {
+            "name": "Typical Weight Per Unit",
+            "dataType": "double",
+            "sourceColumn": "Typical Weight Per Unit"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    #\"Cube_Item-Current\" = Source{[Schema=\"Cube\",Item=\"Item-Current\"]}[Data]",
+                "in",
+                "    #\"Cube_Item-Current\""
+              ]
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Current Item Brand",
+            "levels": [
+              {
+                "name": "Brand",
+                "ordinal": 0,
+                "column": "Brand"
+              },
+              {
+                "name": "Stock Item",
+                "ordinal": 1,
+                "column": "Stock Item"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sales",
+        "columns": [
+          {
+            "name": "Sale Key",
+            "dataType": "int64",
+            "sourceColumn": "Sale Key"
+          },
+          {
+            "name": "City Key",
+            "dataType": "int64",
+            "sourceColumn": "City Key"
+          },
+          {
+            "name": "WWI City ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI City ID"
+          },
+          {
+            "name": "Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Customer Key"
+          },
+          {
+            "name": "WWI Customer ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Customer ID"
+          },
+          {
+            "name": "Bill To Customer Key",
+            "dataType": "int64",
+            "sourceColumn": "Bill To Customer Key"
+          },
+          {
+            "name": "WWI Bill To Customer ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Bill To Customer ID"
+          },
+          {
+            "name": "Stock Item Key",
+            "dataType": "int64",
+            "sourceColumn": "Stock Item Key"
+          },
+          {
+            "name": "WWI Stock Item ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Stock Item ID"
+          },
+          {
+            "name": "Invoice Date Key",
+            "dataType": "dateTime",
+            "sourceColumn": "Invoice Date Key"
+          },
+          {
+            "name": "Delivery Date Key",
+            "dataType": "dateTime",
+            "sourceColumn": "Delivery Date Key"
+          },
+          {
+            "name": "Salesperson Key",
+            "dataType": "int64",
+            "sourceColumn": "Salesperson Key"
+          },
+          {
+            "name": "WWI Employee ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Employee ID"
+          },
+          {
+            "name": "WWI Invoice ID",
+            "dataType": "int64",
+            "sourceColumn": "WWI Invoice ID"
+          },
+          {
+            "name": "Description",
+            "dataType": "string",
+            "sourceColumn": "Description"
+          },
+          {
+            "name": "Package",
+            "dataType": "string",
+            "sourceColumn": "Package"
+          },
+          {
+            "name": "Quantity",
+            "dataType": "int64",
+            "sourceColumn": "Quantity"
+          },
+          {
+            "name": "Unit Price",
+            "dataType": "double",
+            "sourceColumn": "Unit Price"
+          },
+          {
+            "name": "Tax Rate",
+            "dataType": "double",
+            "sourceColumn": "Tax Rate"
+          },
+          {
+            "name": "Total Excluding Tax",
+            "dataType": "double",
+            "sourceColumn": "Total Excluding Tax"
+          },
+          {
+            "name": "Tax Amount",
+            "dataType": "double",
+            "sourceColumn": "Tax Amount"
+          },
+          {
+            "name": "Profit",
+            "dataType": "double",
+            "sourceColumn": "Profit"
+          },
+          {
+            "name": "Total Including Tax",
+            "dataType": "double",
+            "sourceColumn": "Total Including Tax"
+          },
+          {
+            "name": "Total Dry Items",
+            "dataType": "int64",
+            "sourceColumn": "Total Dry Items"
+          },
+          {
+            "name": "Total Chiller Items",
+            "dataType": "int64",
+            "sourceColumn": "Total Chiller Items"
+          },
+          {
+            "name": "Sales Count",
+            "dataType": "int64",
+            "sourceColumn": "Sales Count"
+          },
+          {
+            "name": "Lineage Key",
+            "dataType": "int64",
+            "sourceColumn": "Lineage Key"
+          },
+          {
+            "type": "calculated",
+            "name": "Red Items",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "IF(RELATED('Item'[Color])=\"Red\", Sales[Quantity], 0)"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Current Partition",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Sales = Source{[Schema=\"Cube\",Item=\"Sales\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(Cube_Sales, each [Invoice Date Key] < #date(2015, 1, 1))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>let",
+                  "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                  "    Cube_Sales = Source{[Schema=\"Cube\",Item=\"Sales\"]}[Data],",
+                  "    #\"Filtered Rows\" = Table.SelectRows(Cube_Sales, each [Invoice Date Key] < #date(2015, 1, 1))",
+                  "in",
+                  "    #\"Filtered Rows\"</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "History Partition",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                "    Cube_Sales = Source{[Schema=\"Cube\",Item=\"Sales\"]}[Data],",
+                "    #\"Filtered Rows\" = Table.SelectRows(Cube_Sales, each [Invoice Date Key] >= #date(2015, 1, 1))",
+                "in",
+                "    #\"Filtered Rows\""
+              ]
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>let",
+                  "    Source = #\"SQL/SKYLAR\\SQL19MULTIDIM;WideWorldImportersDW\",",
+                  "    Cube_Sales = Source{[Schema=\"Cube\",Item=\"Sales\"]}[Data],",
+                  "    #\"Filtered Rows\" = Table.SelectRows(Cube_Sales, each [Invoice Date Key] >= #date(2015, 1, 1))",
+                  "in",
+                  "    #\"Filtered Rows\"</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "name": "Total Sales Amount",
+            "expression": "SUM([Total Including Tax])",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Invoice Line Count",
+            "expression": "SUM([Sales Count])",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Invoices",
+            "expression": "DISTINCTCOUNT([WWI Invoice ID])",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Red Items",
+            "expression": " SUM(Sales[Red Items])",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Blue Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"Blue\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Black Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"Black\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Gray Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"Gray\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Light Brown Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"Light Brown\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Steel Gray Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"Steel Gray\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total White Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"White\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Total Yellow Items",
+            "expression": "SUMX('Sales',IF(RELATED('Item'[Color])=\"Yellow\", Sales[Quantity],0))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "% of Red Items",
+            "expression": "[Total Red Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "% of Blue Items",
+            "expression": "[Total Blue Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %",
+            "kpi": {
+              "targetExpression": "0,3",
+              "targetFormatString": "0.00 %;-0.00 %;0.00 %",
+              "statusGraphic": "Traffic Light - Single",
+              "statusExpression": [
+                "var x='Sales'[% of Blue Items] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.15,-1,",
+                "\t                If(x<0.25,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "StaticValue"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Absolute"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "0.15"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "0.25"
+                }
+              ]
+            }
+          },
+          {
+            "name": "% of Black Items",
+            "expression": "[Total Black Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "% of Gray Items",
+            "expression": "[Total Gray Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "% of Light Brown Items",
+            "expression": "[Total Light Brown Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "% of Steel Gray Items",
+            "expression": "[Total Steel Gray Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "% of White Items",
+            "expression": "[Total White Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "% of Yellow Items",
+            "expression": "[Total Yellow Items] / CALCULATE(SUM(Sales[Quantity]),FILTER('Sales', RELATED('Item'[Color])<>\"N/A\"))",
+            "formatString": "0.00 %;-0.00 %;0.00 %"
+          },
+          {
+            "name": "Total Items by Delivery Date",
+            "expression": "CALCULATE(SUM(Sales[Quantity]), USERELATIONSHIP(Sales[Delivery Date Key],'Date'[Date]))",
+            "formatString": "0,0"
+          },
+          {
+            "name": "Sales By Amy Trefl",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=7))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Amy Trefl]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Amy Trefl]/'Sales'[_Sales By Amy Trefl Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Anthony Grosse",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=8))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Anthony Grosse]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Anthony Grosse]/'Sales'[_Sales By Anthony Grosse Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Archer Lamble",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=16))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Archer Lamble]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Archer Lamble]/'Sales'[_Sales By Archer Lamble Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Hudson Hollinworth",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=13))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Hudson Hollinworth]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Hudson Hollinworth]/'Sales'[_Sales By Hudson Hollinworth Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Hudson Onslow",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=3))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Hudson Onslow]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Hudson Onslow]/'Sales'[_Sales By Hudson Onslow Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Jack Potter",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=20))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Jack Potter]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Jack Potter]/'Sales'[_Sales By Jack Potter Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Kayla Woodcock",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=2))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Kayla Woodcock]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Kayla Woodcock]/'Sales'[_Sales By Kayla Woodcock Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Lily Code",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=14))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Lily Code]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Traffic Light - Single",
+              "statusExpression": [
+                "var x='Sales'[Sales By Lily Code]/'Sales'[_Sales By Lily Code Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Sophia Hinton",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=6))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Sophia Hinton]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Sophia Hinton]/'Sales'[_Sales By Sophia Hinton Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Sales By Taj Shand",
+            "expression": "CALCULATE(SUM(Sales[Total Including Tax]),FILTER(Sales,RELATED(Salesperson[WWI Employee ID])=15))",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "kpi": {
+              "targetExpression": "'Sales'[Target Sales For Taj Shand]",
+              "targetFormatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+              "statusGraphic": "Road Signs",
+              "statusExpression": [
+                "var x='Sales'[Sales By Taj Shand]/'Sales'[_Sales By Taj Shand Goal] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<0.8,-1,",
+                "\t                If(x<0.9,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "Measure"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Percentage"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "80"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "90"
+                }
+              ]
+            },
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Amy Trefl",
+            "expression": "CALCULATE([Sales By Amy Trefl]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Anthony Grosse",
+            "expression": "CALCULATE([Sales By Anthony Grosse]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Archer Lamble",
+            "expression": "CALCULATE([Sales By Archer Lamble]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Hudson Hollinworth",
+            "expression": "CALCULATE([Sales By Hudson Hollinworth]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Hudson Onslow",
+            "expression": "CALCULATE([Sales By Hudson Onslow]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Jack Potter",
+            "expression": "CALCULATE([Sales By Jack Potter]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Kayla Woodcock",
+            "expression": "CALCULATE([Sales By Kayla Woodcock]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Lily Code",
+            "expression": "CALCULATE([Sales By Lily Code]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Sophia Hinton",
+            "expression": "CALCULATE([Sales By Sophia Hinton]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Target Sales For Taj Shand",
+            "expression": "CALCULATE([Sales By Taj Shand]*1.1)",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Avg Invoice Total",
+            "expression": " [Total Sales Amount] / DISTINCTCOUNT('Sales'[WWI Invoice ID])",
+            "formatString": "#,0.00 \"kr.\";-#,0.00 \"kr.\";#,0.00 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Total Sales Amount Excluding Tax",
+            "expression": "SUM([Total Excluding Tax])",
+            "formatString": "#,0 \"kr.\";-#,0 \"kr.\";#,0 \"kr.\"",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\"><Currency LCID=\"1030\" DisplayName=\"kr. Danish (Denmark)\" Symbol=\"kr.\" PositivePattern=\"3\" NegativePattern=\"8\" /></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Profit Margin",
+            "expression": " SUM('Sales'[Profit])/SUM('Sales'[Total Excluding Tax])",
+            "formatString": "0.0 %;-0.0 %;0.0 %"
+          }
+        ]
+      },
+      {
+        "name": "Delivery Date",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Date",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Date]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Day Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Day Number]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Day",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Day]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Month]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Short Month",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Short Month]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calendar Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Calendar Month Number]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calendar Month Label",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Calendar Month Label]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calendar Year",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Calendar Year]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calendar Year Label",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Calendar Year Label]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fiscal Month Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Fiscal Month Number]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fiscal Month Label",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Fiscal Month Label]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fiscal Year",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Fiscal Year]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fiscal Year Label",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Fiscal Year Label]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "ISO Week Number",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[ISO Week Number]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Today",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Today]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fiscal Quarter",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Fiscal Quarter]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Calendar Quarter",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Date[Calendar Quarter]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "'Date'"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tailspin Toys Sales",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "WWI Invoice ID",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[WWI Invoice ID]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "City Key",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[City Key]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "WWI City ID",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[WWI City ID]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Customer Key",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Customer Key]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "WWI Customer ID",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[WWI Customer ID]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Bill To Customer Key",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Bill To Customer Key]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "WWI Bill To Customer ID",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[WWI Bill To Customer ID]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Date Key",
+            "dataType": "dateTime",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Date Key]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Salesperson Key",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Salesperson Key]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "WWI Employee ID",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[WWI Employee ID]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Total Excluding Tax",
+            "dataType": "double",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Total Excluding Tax]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Tax Amount",
+            "dataType": "double",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Tax Amount]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Profit",
+            "dataType": "double",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Profit]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Total Including Tax",
+            "dataType": "double",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Total Including Tax]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Total Dry Items",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Total Dry Items]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Total Chiller Items",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Total Chiller Items]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Count",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Count]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Sales Count",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Sales Count]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Invoice Profit - Copy",
+            "dataType": "double",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Invoice Profit - Copy]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Missing Profit",
+            "dataType": "boolean",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Invoice Sales[Missing Profit]",
+            "formatString": "\"TRUE\";\"TRUE\";\"FALSE\""
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "FILTER('Invoice Sales',RELATED(Customer[Buying Group])=\"Tailspin Toys\")"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Item Brand Color",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Brand",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Item[Brand]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Color",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Item[Color]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Item Brand Color Breakdown",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Item Brand Color Breakdown]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "SUMMARIZECOLUMNS('Item'[Brand],'Item'[Color],\"Item Brand Color Breakdown\", COUNT('Item'[Stock Item Key]))"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Brand Color Sales by Buying Group",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Buying Group",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Customer[Buying Group]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Brand",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Item[Brand]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Color",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "Item[Color]"
+          },
+          {
+            "type": "calculatedTableColumn",
+            "name": "Item Brand Color Breakdown",
+            "dataType": "int64",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "[Item Brand Color Breakdown]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "GENERATE(SUMMARIZE('Customer',Customer[Buying Group]),    SUMMARIZE('Item', 'Item'[Brand],'Item'[Color], \"Item Brand Color Breakdown\", SUMX(RELATEDTABLE(Sales), Sales[Quantity])))"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Annual Calcs",
+        "calculationGroup": {
+          "precedence": 25,
+          "calculationItems": [
+            {
+              "name": "YTD",
+              "expression": "CALCULATE(SELECTEDMEASURE(),DATESYTD('Date'[Date]))",
+              "ordinal": 1
+            },
+            {
+              "name": "Previous Year",
+              "expression": "CALCULATE(SELECTEDMEASURE(),PREVIOUSYEAR('Date'[Date]))",
+              "ordinal": 2
+            },
+            {
+              "name": "Next Year",
+              "expression": "CALCULATE(SELECTEDMEASURE(),NEXTYEAR('Date'[Date]))",
+              "ordinal": 3
+            }
+          ]
+        },
+        "columns": [
+          {
+            "name": "Annual Metric",
+            "dataType": "string",
+            "sourceColumn": "Name",
+            "sortByColumn": "Sort Order"
+          },
+          {
+            "name": "Sort Order",
+            "dataType": "int64",
+            "sourceColumn": "Ordinal"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculationGroup 1",
+            "mode": "import",
+            "source": {
+              "type": "calculationGroup"
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "c8e87189-0509-418c-bc8a-8a2c6e075b64",
+        "fromTable": "Invoice Sales",
+        "fromColumn": "Customer Key",
+        "toTable": "Customer",
+        "toColumn": "Customer Key"
+      },
+      {
+        "name": "4fc708ed-962d-48f8-b136-8246f5b11336",
+        "fromTable": "Sales",
+        "fromColumn": "Customer Key",
+        "toTable": "Customer",
+        "toColumn": "Customer Key"
+      },
+      {
+        "name": "cdf8799a-4599-4378-9543-c1467a3e9890",
+        "fromTable": "Invoice Sales",
+        "fromColumn": "City Key",
+        "toTable": "City",
+        "toColumn": "City Key"
+      },
+      {
+        "name": "4688cea1-21e7-4d28-bfb3-11c4fff4dc27",
+        "fromTable": "Sales",
+        "fromColumn": "City Key",
+        "toTable": "City",
+        "toColumn": "City Key"
+      },
+      {
+        "name": "d5c6e469-e9eb-49a2-a071-2138b1ec641a",
+        "fromTable": "Invoice Sales",
+        "fromColumn": "Invoice Date Key",
+        "toTable": "Date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "7fbea91f-f010-4541-96a4-5af0923baed0",
+        "fromTable": "Sales",
+        "fromColumn": "Invoice Date Key",
+        "toTable": "Date",
+        "toColumn": "Date"
+      },
+      {
+        "name": "dfa560c0-5ae9-44aa-afe9-f3a7afd5a97f",
+        "fromTable": "Sales",
+        "fromColumn": "Delivery Date Key",
+        "toTable": "Date",
+        "toColumn": "Date",
+        "isActive": false
+      },
+      {
+        "name": "c2c2e025-5a26-4f45-9ee2-e311021c48b5",
+        "fromTable": "Sales",
+        "fromColumn": "Stock Item Key",
+        "toTable": "Item",
+        "toColumn": "Stock Item Key"
+      },
+      {
+        "name": "2941775a-6a3b-4460-be8e-faa2d76f4980",
+        "fromTable": "Sales",
+        "fromColumn": "WWI Stock Item ID",
+        "toTable": "Item-Current",
+        "toColumn": "WWI Stock Item ID"
+      },
+      {
+        "name": "ccfbb78f-05a2-49b0-8a45-7d2065a9c0b1",
+        "fromCardinality": "one",
+        "fromTable": "Invoice",
+        "fromColumn": "WWI Invoice ID",
+        "toTable": "Invoice Sales",
+        "toColumn": "WWI Invoice ID",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "96a59d82-d540-4df9-803c-e9ed385c6949",
+        "fromTable": "Sales",
+        "fromColumn": "Salesperson Key",
+        "toTable": "Salesperson",
+        "toColumn": "Employee Key"
+      },
+      {
+        "name": "54327eba-98b6-4219-a3a5-f630b42cf869",
+        "fromTable": "Invoice Sales",
+        "fromColumn": "Salesperson Key",
+        "toTable": "Salesperson",
+        "toColumn": "Employee Key"
+      },
+      {
+        "name": "d9297f65-5442-4fcf-8d72-4b434fc31ead",
+        "fromTable": "Sales",
+        "fromColumn": "Delivery Date Key",
+        "toTable": "Delivery Date",
+        "toColumn": "Date"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
